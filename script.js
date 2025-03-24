@@ -24,13 +24,24 @@ canvas.addEventListener("mousedown", (e) => {
     let text = prompt("Enter text:");
     if (text) {
       ctx.fillStyle = color;
-      let fontSize = canvas.width / text.length;
-      ctx.font = `${fontSize}px Arial`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
+
+      // Adjust font size dynamically to fit within canvas width
+      let maxWidth = canvas.width * 0.8; // Leave some margin
+      let fontSize = canvas.width / (text.length * 0.6);
+      fontSize = Math.min(fontSize, canvas.height);
+      ctx.font = `${fontSize}px Arial`;
+
       let x = canvas.width / 2;
-      let y = canvas.height / 2;
-      ctx.fillText(text, x, y);
+
+      let textMetrics = ctx.measureText(text);
+
+      const diff = textMetrics.actualBoundingBoxAscent - textMetrics.actualBoundingBoxDescent;
+
+      let y = canvas.height / 2 + diff / 2;
+
+      ctx.fillText(text, x, y, maxWidth);
     }
   }
 });
