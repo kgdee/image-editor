@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Editor</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="toolbar">
+        <button onclick="setTool('brush')">Brush</button>
+        <button onclick="setTool('bucket')">Color Bucket</button>
+        <button onclick="setTool('text')">Text</button>
+        <input type="color" id="colorPicker" value="#000000" />
+        <input type="file" id="import" accept="image/*" onchange="importImage(event)" />
+        <button onclick="exportImage()">Export</button>
+      </div>
+
+      <canvas id="canvas" width="512" height="512"></canvas>
+    </div>
+  </body>
+</html>
