@@ -10,17 +10,30 @@
     <script src="script.js" defer></script>
   </head>
   <body>
-    <div class="container">
-      <div class="toolbar">
-        <button onclick="setTool('brush')">Brush</button>
-        <button onclick="setTool('bucket')">Color Bucket</button>
-        <button onclick="setTool('text')">Text</button>
-        <input type="color" id="colorPicker" value="#000000" />
-        <input type="file" id="import" accept="image/*" onchange="importImage(event)" />
-        <button onclick="exportImage()">Export</button>
-      </div>
+    <div class="app editor container">
+      <div class="canvas-container">
+        <canvas id="canvas" width="512" height="512"></canvas>
 
-      <canvas id="canvas" width="512" height="512"></canvas>
+        <div class="toolbar">
+          <input type="color" id="colorPicker" value="#000000" />
+          <button onclick="setTool('brush')">
+            <i class="bi bi-brush"></i>
+          </button>
+          <button onclick="setTool('bucket')">
+            <i class="bi bi-paint-bucket"></i>
+          </button>
+          <button onclick="setTool('text')">
+            <i class="bi bi-fonts"></i>
+          </button>
+          <label class="file-input">
+            <i class="bi bi-file-earmark"></i>
+            <input type="file" class="hidden" id="import" accept="image/*" onchange="importImage(event)" />
+          </label>
+          <button onclick="exportImage()">
+            <i class="bi bi-floppy"></i>
+          </button>
+        </div>
+      </div>
     </div>
   </body>
 </html>
