@@ -16,14 +16,14 @@
 
         <div class="toolbar">
           <input type="color" id="colorPicker" value="#000000" />
-          <button onclick="setTool('brush')">
-            <i class="bi bi-brush"></i>
-          </button>
-          <button onclick="setTool('bucket')">
+          <button onclick="fillCanvas()">
             <i class="bi bi-paint-bucket"></i>
           </button>
-          <button onclick="setTool('text')">
+          <button onclick="addText()">
             <i class="bi bi-fonts"></i>
+          </button>
+          <button onclick="clearCanvas()">
+            <i class="bi bi-trash"></i>
           </button>
           <label class="file-input">
             <i class="bi bi-file-earmark"></i>
