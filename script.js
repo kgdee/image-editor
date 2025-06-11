@@ -28,12 +28,15 @@ canvas.addEventListener("pointerdown", (e) => {
     ctx.moveTo(e.offsetX, e.offsetY);
   }
 });
-
 canvas.addEventListener("pointermove", (e) => {
   if (onCanvas && drawing && brushMode) {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
     ctx.strokeStyle = color;
     ctx.lineWidth = 5;
-    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.lineTo(x, y);
     ctx.stroke();
   }
 });
