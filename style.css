@@ -13,9 +13,15 @@
   border: none;
   text-decoration: none;
   line-height: 1;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-a, button {
+*::-webkit-scrollbar {
+  display: none;
+}
+
+button {
   cursor: pointer;
 }
 
@@ -41,7 +47,8 @@ body {
 }
 
 .app {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
   width: 100%;
   height: 100%;
@@ -58,9 +65,11 @@ body {
 
 .canvas-container {
   position: relative;
+  max-width: 100%;
 }
 
 .canvas-container canvas {
+  width: 100%;
   background-color: white;
   cursor: crosshair;
 }
@@ -86,4 +95,34 @@ body {
   color: white;
   font-size: 2rem;
   cursor: pointer;
+}
+
+/* Medium screens (Tablets, up to 768px wide) */
+@media (max-width: 768px) {
+  .canvas-container {
+    width: 70%;
+  }
+  .app {
+    padding: 10px;
+  }
+}
+
+/* Small screens (Phones, up to 480px wide) */
+@media (max-width: 480px) {
+  .canvas-container {
+    width: 100%;
+  }
+
+  .editor {
+    align-items: flex-start;
+    padding-top: 75px;
+  }
+  .toolbar {
+    top: calc(100% + 10px);
+    right: 50%;
+    transform: translateX(50%);
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+  }
 }

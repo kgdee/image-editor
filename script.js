@@ -1,29 +1,35 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-let brushMode = true
+const colorPicker = document.getElementById("colorPicker");
+let brushMode = true;
 let drawing = false;
-let color = document.getElementById("colorPicker").value;
+let color = colorPicker.value;
+let onCanvas = false;
 
-document.getElementById("colorPicker").addEventListener("input", (e) => {
+document.addEventListener("DOMContentLoaded", function (e) {
+  if (canvas.matches(":hover")) {
+    onCanvas = true;
+  }
+});
+
+colorPicker.addEventListener("input", (e) => {
   color = e.target.value;
 });
 
-canvas.addEventListener("mousedown", (e) => {
+document.addEventListener("pointerdown", (e) => {
+  if (brushMode) {
+    drawing = true;
+  }
+});
+
+canvas.addEventListener("pointerdown", (e) => {
   if (brushMode) {
     ctx.beginPath();
     ctx.moveTo(e.offsetX, e.offsetY);
-  } 
+  }
 });
 
-let onCanvas = false
-
-document.addEventListener("mousedown", (e) => {
-  if (brushMode) {
-    drawing = true
-  }
-})
-
-canvas.addEventListener("mousemove", (e) => {
+canvas.addEventListener("pointermove", (e) => {
   if (onCanvas && drawing && brushMode) {
     ctx.strokeStyle = color;
     ctx.lineWidth = 5;
@@ -32,24 +38,24 @@ canvas.addEventListener("mousemove", (e) => {
   }
 });
 
-canvas.addEventListener("mouseenter", (e) => {
-  onCanvas = true
+canvas.addEventListener("pointerenter", (e) => {
+  onCanvas = true;
   if (drawing && brushMode) {
     ctx.beginPath();
     ctx.moveTo(e.offsetX, e.offsetY);
   }
 });
 
-document.addEventListener("mouseup", () => {
+document.addEventListener("pointerup", () => {
   drawing = false;
 });
-canvas.addEventListener("mouseleave", () => {
-  onCanvas = false
+canvas.addEventListener("pointercancel", () => {
+  onCanvas = false;
 });
 
 function fillCanvas() {
   ctx.fillStyle = color;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 function addText() {
@@ -80,7 +86,6 @@ function addText() {
 function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
-
 
 function importImage(event) {
   const file = event.target.files[0];
