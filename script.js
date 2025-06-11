@@ -52,7 +52,7 @@ canvas.addEventListener("pointerenter", (e) => {
 document.addEventListener("pointerup", () => {
   drawing = false;
 });
-canvas.addEventListener("pointercancel", () => {
+canvas.addEventListener("pointerleave", () => {
   onCanvas = false;
 });
 
